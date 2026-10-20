@@ -6,6 +6,8 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
 
 ## [Unreleased]
 
+## [2026.10.5] - 2026-10-20
+
 ### Added
 
 - Icons for Thunderbird (the mail icon), Spotify (the music icon), VSCodium
@@ -150,7 +152,8 @@ The first release.
   each desktop shows on common screens, and the boot splash's layout from
   720p to 4K
 
-[Unreleased]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.4...HEAD
+[Unreleased]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.5...HEAD
+[2026.10.5]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.4...v2026.10.5
 [2026.10.4]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.3...v2026.10.4
 [2026.10.3]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.2...v2026.10.3
 [2026.10.2]: https://github.com/plusky/halloween-openSUSE/compare/v2026.10.1...v2026.10.2
