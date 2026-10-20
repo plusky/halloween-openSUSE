@@ -248,9 +248,7 @@ The artwork is made with generative AI (Picsart: Flux 2 Pro, Nano Banana 2 and
 Recraft), then selected, cut out, retouched and composed by hand: every folder
 icon is assembled from a master folder and an emblem, crops and colours are
 adjusted by the build tools. Every prompt, model, setting and choice is
-recorded in [`art/prompts/`](art/prompts/). Two app icons, the code editor and
-the chat bubbles, were drawn by hand by a contributor; that is recorded there
-too.
+recorded in [`art/prompts/`](art/prompts/).
 
 Purely AI-generated material may not be protected by copyright in some
 countries (see the US Copyright Office's 2025 report on copyrightability). The
