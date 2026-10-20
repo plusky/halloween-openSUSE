@@ -1,5 +1,33 @@
 # 10 Icons after the design review
 
+- Masters: `art/source/vectors/app-calculator.svg`,
+  `art/source/vectors/app-camera.svg`, `art/source/vectors/app-clocks.svg`,
+  `art/source/vectors/app-contacts.svg`, `art/source/vectors/app-diskusage.svg`,
+  `art/source/vectors/app-docviewer.svg`, `art/source/vectors/app-logs.svg`,
+  `art/source/vectors/app-maps.svg`, `art/source/vectors/app-connections.svg`,
+  `art/source/vectors/app-videos.svg`, `art/source/vectors/app-music.svg`,
+  `art/source/vectors/app-audio.svg`, `art/source/vectors/app-tour.svg`,
+  `art/source/vectors/app-tweaks.svg`, `art/source/vectors/app-extensions.svg`,
+  `art/source/vectors/app-mail.svg`, `art/source/vectors/app-updates.svg`,
+  `art/source/vectors/app-notes.svg`, `art/source/vectors/app-dictionary.svg`,
+  `art/source/vectors/app-search.svg`, `art/source/vectors/app-sensors.svg`,
+  `art/source/vectors/app-clipboard.svg`, `art/source/vectors/app-color.svg`,
+  `art/source/vectors/app-yast.svg`, `art/source/vectors/app-volume.svg`,
+  `art/source/vectors/app-bluetooth.svg`,
+  `art/source/vectors/device-printer.svg`,
+  `art/source/vectors/device-keyboard.svg`,
+  `art/source/vectors/device-headphones.svg`,
+  `art/source/vectors/device-monitor.svg`,
+  `art/source/vectors/device-computer.svg`,
+  `art/source/vectors/settings-pumpkin.svg`,
+  `art/source/vectors/glyph-power.svg`, `art/source/vectors/glyph-access.svg`,
+  `art/source/vectors/glyph-hibernate.svg`, `art/source/vectors/glyph-apps.svg`,
+  `art/source/vectors/glyph-screensaver.svg`,
+  `art/source/vectors/glyph-logout.svg`, `art/source/vectors/glyph-brush.svg`,
+  `art/source/vectors/device-harddisk.svg`, `art/source/vectors/device-usb.svg`,
+  `art/source/vectors/device-server.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The first design review (icons, colours and states, the brief, platform
 rules) found the third round off-style and without seasonal touches, a few
 older masters misread or looking like other projects' marks, and settings

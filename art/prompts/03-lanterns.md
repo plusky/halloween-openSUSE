@@ -1,5 +1,8 @@
 # 03 Pumpkin lanterns
 
+- Masters: `art/source/lantern-lit.png`, `art/source/lantern-unlit.png`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The five lanterns in the Plasma splash light up one by one, so the lit and
 unlit versions must have exactly the same outline.
 

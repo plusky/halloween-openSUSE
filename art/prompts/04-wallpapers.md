@@ -1,5 +1,8 @@
 # 04 Wallpapers
 
+- Masters: `art/source/wallpaper-dusk.png`, `art/source/wallpaper-night.png`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 Composition rules: the chameleon in the right third; calm sky on the left
 and in the centre for desktop icons; the bottom tenth quiet for the panel;
 nothing important outside the central 90% of the width (the 16:10 crop).

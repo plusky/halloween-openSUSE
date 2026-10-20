@@ -1,5 +1,25 @@
 # 07 Start menu and app icons
 
+- Masters: `art/source/vectors/app-discover.svg`,
+  `art/source/vectors/app-konsole.svg`, `art/source/vectors/app-kate.svg`,
+  `art/source/vectors/app-spectacle.svg`, `art/source/vectors/app-ark.svg`,
+  `art/source/vectors/app-gwenview.svg`, `art/source/vectors/app-help.svg`,
+  `art/source/vectors/app-infocenter.svg`, `art/source/vectors/app-kwallet.svg`,
+  `art/source/vectors/app-menuedit.svg`, `art/source/vectors/app-qrca.svg`,
+  `art/source/vectors/app-skanpage.svg`, `art/source/vectors/app-sysmon.svg`,
+  `art/source/vectors/app-bug.svg`, `art/source/vectors/app-emoji.svg`,
+  `art/source/vectors/app-settings.svg`,
+  `art/source/vectors/app-kdeconnect.svg`, `art/source/vectors/app-bridge.svg`,
+  `art/source/vectors/emblem-bat.svg`, `art/source/vectors/glyph-bookmark.svg`,
+  `art/source/vectors/glyph-grid.svg`, `art/source/vectors/glyph-wand.svg`,
+  `art/source/vectors/glyph-crystal.svg`, `art/source/vectors/glyph-web.svg`,
+  `art/source/vectors/glyph-quill.svg`, `art/source/vectors/glyph-gear.svg`,
+  `art/source/vectors/glyph-broom.svg`, `art/source/vectors/glyph-signpost.svg`,
+  `art/source/vectors/glyph-sleep.svg`, `art/source/vectors/glyph-reboot.svg`,
+  `art/source/vectors/glyph-lock.svg`, `art/source/vectors/glyph-ghosts.svg`,
+  `art/source/vectors/glyph-brush.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 Goal: every icon in the app launcher Halloween-themed, including Discover
 (the store). Icon names come from the Kickoff and kicker
 binaries on Plasma 6.8 and the menu's `.desktop` and `.directory` files.

@@ -1,5 +1,14 @@
 # 11 Settings glyphs: KDE System Settings and GNOME Settings
 
+- Masters: `art/source/vectors/glyph-palette.svg`,
+  `art/source/vectors/glyph-cursor.svg`, `art/source/vectors/glyph-speech.svg`,
+  `art/source/vectors/glyph-globe.svg`,
+  `art/source/vectors/glyph-magnifier.svg`,
+  `art/source/vectors/glyph-stylus.svg`, `art/source/vectors/glyph-touch.svg`,
+  `art/source/vectors/glyph-shield.svg`, `art/source/vectors/glyph-printer.svg`,
+  `art/source/vectors/glyph-heart.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 Glyphs for the settings that still showed stock icons: KDE System
 Settings' modules and categories, carved into the pumpkin master, and
 GNOME Settings' sidebar panels, as one-colour icons. Generated with the

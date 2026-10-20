@@ -1,5 +1,14 @@
 # 08 More icons: web browser, file types, devices, folders
 
+- Masters: `art/source/vectors/app-browser.svg`,
+  `art/source/vectors/mime-page.svg`, `art/source/vectors/device-optical.svg`,
+  `art/source/vectors/glyph-cloud.svg`,
+  `art/source/vectors/glyph-hourglass.svg`,
+  `art/source/vectors/glyph-gamepad.svg`, `art/source/vectors/glyph-chest.svg`,
+  `art/source/vectors/device-harddisk.svg`, `art/source/vectors/device-usb.svg`,
+  `art/source/vectors/device-server.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The icon theme's second round: an original web-browser icon (used for Firefox
 too, instead of a modified Firefox logo), file-type icons, drives and media,
 and more folder variants. Same pipeline as before: SVG masters in

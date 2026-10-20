@@ -1,5 +1,15 @@
 # 05 Icons
 
+- Masters: `art/source/vectors/folder.svg`, `art/source/vectors/trash.svg`,
+  `art/source/vectors/potion.svg`, `art/source/vectors/launcher.svg`,
+  `art/source/vectors/emblem-scroll.svg`, `art/source/vectors/emblem-acorn.svg`,
+  `art/source/vectors/emblem-note.svg`, `art/source/vectors/emblem-picture.svg`,
+  `art/source/vectors/emblem-reel.svg`, `art/source/vectors/emblem-stencil.svg`,
+  `art/source/vectors/emblem-lantern.svg`,
+  `art/source/vectors/emblem-cottage.svg`,
+  `art/source/vectors/emblem-monitor.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 ## Master folder icon
 
 Sets the style for every other icon and ornament: it is the

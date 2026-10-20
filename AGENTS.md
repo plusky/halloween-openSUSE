@@ -63,9 +63,9 @@ together.
   to `TARGETS` in `tools/targets/__init__.py`.
 - New icons: an SVG master in `art/source/vectors/`, mapped to icon names in
   `tools/vectors.py`.
-- New art: record how it was made in `art/prompts/`, in the format of the
-  latest record there: for generated art the model, its settings and the full
-  prompts; for art made by hand who made it and with what.
+- New art: a record in `art/prompts/` with its masters and their copyright, in
+  the format `art/prompts/README.md` gives; `make check` holds every master to
+  it.
 - Install paths: only in the table in `tools/install.py`.
 - `build/` is output. `art/source/` holds the masters, in Git LFS.
 

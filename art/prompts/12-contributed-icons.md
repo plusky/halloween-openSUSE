@@ -1,5 +1,8 @@
 # 12 Contributed icons: code editor and chat
 
+- Masters: `art/source/vectors/app-code.svg`, `art/source/vectors/app-chat.svg`
+- Copyright: 2026 Pablo Herranz Ramírez <pablo.herranz@suse.com>
+
 Two app icon masters contributed by Pablo Herranz Ramírez in pull request #22,
 which describes them as hand-drawn in the theme's flat palette style. They are
 SVG on the set's 2048-unit canvas. The build holds their colours to the palette
