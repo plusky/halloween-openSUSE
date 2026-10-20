@@ -5,11 +5,14 @@ Xfce and Sway: warm candle-lit colours, falling leaves, carved pumpkins and a
 friendly chameleon in a witch hat.
 
 [![Check](https://github.com/plusky/halloween-openSUSE/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/plusky/halloween-openSUSE/actions/workflows/check.yml)
+[![Packages in X11:Utilities](https://build.opensuse.org/projects/X11:Utilities/packages/halloween-openSUSE/badge.svg?repository=openSUSE_Tumbleweed)](https://build.opensuse.org/package/show/X11:Utilities/halloween-openSUSE)
 [![Licence: multiple (REUSE)](https://img.shields.io/badge/licence-multiple_(REUSE)-a77bca?labelColor=1c1622)](#licence)
 [![KDE Plasma 6.8+](https://img.shields.io/badge/KDE_Plasma-6.8%2B-e8751a?labelColor=1c1622)](https://kde.org/plasma-desktop/)
 [![GNOME 50+](https://img.shields.io/badge/GNOME-50%2B-e8751a?labelColor=1c1622)](https://www.gnome.org/)
 [![Xfce 4.20+](https://img.shields.io/badge/Xfce-4.20%2B-e8751a?labelColor=1c1622)](https://www.xfce.org/)
+[![Sway 1.12+](https://img.shields.io/badge/Sway-1.12%2B-e8751a?labelColor=1c1622)](https://swaywm.org/)
 [![openSUSE Tumbleweed](https://img.shields.io/badge/openSUSE-Tumbleweed-f0b429?labelColor=1c1622)](https://get.opensuse.org/tumbleweed/)
+[![Latest release](https://img.shields.io/github/v/release/plusky/halloween-openSUSE?label=release&color=a77bca&labelColor=1c1622)](https://github.com/plusky/halloween-openSUSE/releases/latest)
 
 <img src="docs/screenshots/desktop.jpg" width="100%" alt="KDE Plasma desktop with a storybook wallpaper at night: a green chameleon in a purple witch hat and striped scarf sits on a mossy branch beside three glowing jack-o'-lanterns, under a full moon among birch trees. The panel at the bottom shows the chameleon launcher and pumpkin-orange app icons.">
 
@@ -57,8 +60,8 @@ See [gnome/](gnome/) and [xfce/](xfce/) for what each edition covers.
 
 ## Requirements
 
-- openSUSE Tumbleweed with KDE Plasma 6.8, GNOME 50 or Xfce 4.20 (or newer), or
-  with Sway
+- openSUSE Tumbleweed with KDE Plasma 6.8, GNOME 50, Xfce 4.20 or Sway 1.12, or
+  newer
 - With Sway, Waybar and SwayNotificationCenter (`waybar`, `swaync`) for the bar
   and notifications
 - For the GNOME Shell theme, the User Themes extension
