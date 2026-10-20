@@ -38,8 +38,8 @@ friendly chameleon in a witch hat.
 | Plasma style: autumn colours, leaf sprig on popups, ember tooltip glow, pumpkin clock | `openSUSE-halloween` | Plasma |
 | Colour scheme | `openSUSEHalloween` | Plasma and KDE apps |
 | Global theme with a pumpkin splash screen | `org.openSUSE.halloween.desktop` | Plasma |
-| Icon theme over Breeze Dark: folders, file types, drives and devices, trash, the apps KDE, GNOME and Xfce ship by default (files, terminal, settings, editor, calculator, clocks, mail, maps, music, videos and more) and YaST, System Settings' and Xfce's settings as glyphs carved into pumpkins and GNOME Settings' panels as one-colour glyphs, a web-browser icon (also for Firefox), app-menu and power icons | `openSUSE-halloween` | Plasma |
-| The same icons over Adwaita | `openSUSE-halloween-adwaita` | GNOME, Xfce |
+| Icon theme over Breeze Dark: folders, file types, drives and devices, trash, the apps KDE, GNOME and Xfce ship by default (files, terminal, settings, editor, calculator, clocks, mail (also Thunderbird), maps, music (also Spotify), videos and more) and YaST, System Settings' and Xfce's settings as glyphs carved into pumpkins and GNOME Settings' panels as one-colour glyphs, a web-browser icon (also for Firefox), code-editor and chat icons (VSCodium, Slack, Polari, NeoChat), app-menu and power icons | `openSUSE-halloween` | Plasma |
+| The same icons over Adwaita | `openSUSE-halloween-adwaita` | GNOME, Xfce, Sway |
 | GTK 3 theme: night colours with ember and pumpkin accents, built on [adw-gtk3](https://github.com/lassekongo83/adw-gtk3) | `openSUSE-halloween` | GNOME, Xfce, GTK 3 apps |
 | GNOME Shell theme: top bar, menus, quick settings, calendar | `openSUSE-halloween` | GNOME with the User Themes extension |
 | Window manager theme, also at 1.5× and 2× | `openSUSE-halloween`, `-hdpi`, `-xhdpi` | Xfce (xfwm4) |
@@ -248,7 +248,9 @@ The artwork is made with generative AI (Picsart: Flux 2 Pro, Nano Banana 2 and
 Recraft), then selected, cut out, retouched and composed by hand: every folder
 icon is assembled from a master folder and an emblem, crops and colours are
 adjusted by the build tools. Every prompt, model, setting and choice is
-recorded in [`art/prompts/`](art/prompts/).
+recorded in [`art/prompts/`](art/prompts/). Two app icons, the code editor and
+the chat bubbles, were drawn by hand by a contributor; that is recorded there
+too.
 
 Purely AI-generated material may not be protected by copyright in some
 countries (see the US Copyright Office's 2025 report on copyrightability). The

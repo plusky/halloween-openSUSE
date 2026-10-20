@@ -136,7 +136,9 @@ licence:
   and format from them; don't commit generated sizes.
 - **Record provenance** in `art/prompts/NN-short-name.md`: model, settings,
   the full prompt, references, which variant was chosen and why, and any
-  post-processing. See [`art/prompts/README.md`](art/prompts/README.md).
+  post-processing; for art made by hand, who made it and with what. See
+  [`art/prompts/README.md`](art/prompts/README.md). Art you didn't make with
+  the project's own tools also gets your copyright in `REUSE.toml`.
 - **Respect trademarks.** Never reproduce or modify the openSUSE logo (the
   chameleon is an original character) or other projects' logos, such as
   Firefox's. Prompts never say "openSUSE", "Geeko" or "logo".
