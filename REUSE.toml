@@ -10,6 +10,13 @@ path = ["art/**", "shared/wallpapers/**", "shared/icons/**", "shared/firefox/**"
 SPDX-FileCopyrightText = "2026 Martin Pluskal <martin@pluskal.org>"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
+# Icon masters contributed by hand (art/prompts/12-contributed-icons.md); after
+# the artwork above, so this one wins for these files
+[[annotations]]
+path = ["art/source/vectors/app-code.svg", "art/source/vectors/app-chat.svg"]
+SPDX-FileCopyrightText = "2026 Pablo Herranz Ramírez <pablo.herranz@suse.com>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
 # The Plasma style is built from Breeze (LGPL); its ornaments share that licence
 [[annotations]]
 path = "plasma/desktoptheme/**"

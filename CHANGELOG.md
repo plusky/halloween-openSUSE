@@ -6,6 +6,13 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
 
 ## [Unreleased]
 
+### Added
+
+- Icons for Thunderbird (the mail icon), Spotify (the music icon), VSCodium
+  and Visual Studio Code (a code editor with a ghost), and Slack, Polari and
+  NeoChat (chat bubbles with fangs and a witch hat), contributed by Pablo
+  Herranz Ramírez
+
 ## [2026.10.4] - 2026-10-20
 
 ### Fixed

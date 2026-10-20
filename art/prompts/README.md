@@ -2,7 +2,8 @@
 
 One file per generated asset, numbered in the order they were made
 (`NN-short-name.md`). Each records everything needed to reproduce or
-continue the asset:
+continue the asset (art made by hand gets a file too, saying who made it and
+with what):
 
 - model and settings (size, aspect ratio, seed, image weight)
 - the full prompt and negative prompt
