@@ -897,6 +897,80 @@ def check_readme_images():
     ok(f"README: {len(shown)} screenshots, all there")
 
 
+def reuse_copyrights(paths):
+    """{path: the copyright texts REUSE resolves for it ("2026 Name <email>")},
+    or None without reuse. reuse's own Python API where it is installed (the
+    venv, openSUSE's python3-reuse), else the `reuse spdx` report."""
+    def text(line):
+        return re.sub(r"^SPDX-FileCopyrightText:\s*", "", str(line)).strip()
+    try:
+        from reuse.project import Project
+        project = Project.from_directory(ROOT)
+        found = {}
+        for path in paths:
+            infos = project.reuse_info_of(ROOT / path)
+            found[path] = {text(n) for i in infos
+                           for n in [*getattr(i, "copyright_notices", ()), *getattr(i, "copyright_lines", ())]}
+        return found
+    except ImportError:
+        pass
+    reuse = shutil.which("reuse") or str(ROOT / "tools/.venv/bin/reuse")
+    if not Path(reuse).exists():
+        return None
+    report = subprocess.run([reuse, "--root", str(ROOT), "spdx"], capture_output=True, text=True).stdout
+    found = {}
+    for name, body in re.findall(r"^FileName: \./(.+?)\n(.*?)(?=^FileName: |\Z)", report, re.M | re.S):
+        if name in paths:
+            notices = re.search(r"^FileCopyrightText: <text>(.*?)</text>", body, re.M | re.S)
+            found[name] = {text(line) for line in (notices.group(1).splitlines() if notices else ()) if line.strip()}
+    return found
+
+
+def check_art_provenance():
+    """Every master in art/source/ is listed by a record in art/prompts/, which
+    says whose copyright it is, and REUSE gives the master that copyright: new
+    art can't come in without its provenance, nor credited to someone who
+    didn't make it (art/prompts/README.md says how records list their masters)."""
+    masters = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "art/source").rglob("*")
+                     if p.is_file() and not p.name.startswith("."))
+    problems, listed = [], {}
+    records = sorted((ROOT / "art/prompts").glob("[0-9][0-9]-*.md"))
+    for record in records:
+        # "- Masters: `art/source/…`, …" (continued on lines indented by two
+        # spaces) and "- Copyright: 2026 Name <email>"
+        fields = re.findall(r"^- (Masters|Copyright): (.*(?:\n  .*)*)", record.read_text(), re.M)
+        listing = [value for key, value in fields if key == "Masters"]
+        owner = [" ".join(value.split()) for key, value in fields if key == "Copyright"]
+        where = f"art/prompts/{record.name}"
+        if len(listing) != 1 or len(owner) != 1:
+            problems.append(f"{where}: needs one '- Masters:' and one '- Copyright:' line under its title")
+            continue
+        for path in re.findall(r"`([^`]+)`", listing[0]):
+            if path.startswith("art/source/") and (ROOT / path).is_file():
+                listed.setdefault(path, []).append((where, owner[0]))
+            else:
+                problems.append(f"{where}: lists {path}, which is no file in art/source/")
+    problems += [f"{path}: no record in art/prompts/ lists it; add it to the Masters: line of the record that says "
+                 f"how it was made" for path in masters if path not in listed]
+    copyrights = reuse_copyrights(sorted(listed))
+    if copyrights is None:
+        print("skip  art copyright against REUSE (reuse not installed)")
+    else:
+        for path, records_of in sorted(listed.items()):
+            for where, owner in records_of:
+                if owner not in copyrights.get(path, set()):
+                    has = ", ".join(sorted(copyrights.get(path, ()))) or "nothing"
+                    problems.append(f"{path}: {where} says {owner}, REUSE says {has}; give it that copyright "
+                                    f"in REUSE.toml")
+    for problem in problems[:8]:
+        fail(f"art provenance: {problem}")
+    if problems:
+        fail(f"art provenance: {len(problems)} problems in all (art/prompts/README.md says what a record lists)")
+        return
+    ok(f"art provenance: {len(masters)} masters, each listed by one of {len(records)} records in art/prompts/ "
+       f"with the copyright REUSE gives it")
+
+
 def check_reuse():
     reuse = shutil.which("reuse") or str(ROOT / "tools/.venv/bin/reuse")
     if not Path(reuse).exists():
@@ -949,6 +1023,7 @@ def main():
     check_manifest()
     check_install()
     check_readme_images()
+    check_art_provenance()
     check_reuse()
     placeholders = (BUILD / "placeholders.txt").read_text().split("\n") if (BUILD / "placeholders.txt").exists() else []
     placeholders = [p for p in placeholders if p]

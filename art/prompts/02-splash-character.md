@@ -1,5 +1,8 @@
 # 02 Splash and boot-splash chameleon
 
+- Masters: `art/source/hero.png`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The chameleon from the concept sheet, alone, for the Plasma splash
 (`hero.png`, 512 px) and the Plymouth watermark (300 px).
 

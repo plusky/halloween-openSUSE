@@ -1,5 +1,8 @@
 # 06 Plasma style ornaments
 
+- Masters: `art/source/vectors/sprig.svg`, `art/source/vectors/clock.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 `recraftv4_1_utility_vector` (SVG), no reference, count 2 each.
 `tools/vectors.py` turns them into the ornaments that `tools/plasma_style.py`
 places into Breeze's SVGs.

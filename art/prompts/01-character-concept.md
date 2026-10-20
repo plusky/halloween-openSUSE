@@ -1,5 +1,8 @@
 # 01 Character concept sheet
 
+- Masters: `art/source/concept-sheet.png`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The chameleon's look, locked before any other art is made.
 
 ## Free drafts

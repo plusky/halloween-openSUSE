@@ -12,6 +12,8 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
   and Visual Studio Code (a code editor with a ghost), and Slack, Polari and
   NeoChat (chat bubbles with fangs and a witch hat), contributed by Pablo
   Herranz Ramírez
+- A check that every art master is listed by a record in `art/prompts/`, with
+  the copyright `REUSE.toml` gives it
 
 ## [2026.10.4] - 2026-10-20
 

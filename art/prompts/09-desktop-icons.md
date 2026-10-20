@@ -1,5 +1,13 @@
 # 09 Desktop icons: devices and settings glyphs
 
+- Masters: `art/source/vectors/device-phone.svg`,
+  `art/source/vectors/device-mouse.svg`,
+  `art/source/vectors/device-battery.svg`,
+  `art/source/vectors/glyph-keyboard.svg`, `art/source/vectors/glyph-mouse.svg`,
+  `art/source/vectors/glyph-panel.svg`, `art/source/vectors/glyph-window.svg`,
+  `art/source/vectors/glyph-bell.svg`, `art/source/vectors/glyph-battery.svg`
+- Copyright: 2026 Martin Pluskal <martin@pluskal.org>
+
 The third icon round: the apps GNOME and Xfce ship by default, devices and
 Xfce's settings dialogs. Generated with the Picsart `gen-ai` command-line
 tool; image-to-image with the master folder as reference failed upstream at
