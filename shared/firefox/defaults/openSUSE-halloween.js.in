@@ -1,0 +1,7 @@
+// Installed by the optional defaults (make install-defaults) into Firefox's
+// browser/defaults/preferences, where vendor defaults live: makes the Halloween
+// theme the theme of every Firefox profile created from now on. Firefox starts
+// a new profile with the theme this default names; without it, a theme found
+// in Firefox's own folders stays off until someone picks it. Profiles that
+// exist keep their theme, and one picked in about:addons still wins.
+pref("extensions.activeThemeID", "@FIREFOX_ID@");

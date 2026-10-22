@@ -61,3 +61,9 @@ gtk-symbolic-parser = "https://gitlab.gnome.org/GNOME/gtk/-/blob/4.22.5/gtk/gdkt
 gtk-icon-lookup = "https://gitlab.gnome.org/GNOME/gtk/-/blob/4.22.5/gtk/gtkicontheme.c"
 # vectors.py GNOME_SETTINGS: the icons of GNOME Settings' sidebar and pages
 gnome-settings-panels = "https://gitlab.gnome.org/GNOME/gnome-control-center/-/tree/50.4/panels"
+# targets/firefox.py and check.py check_firefox(): Firefox installs a theme it
+# finds in its own folders disabled (loadManifestFromWebManifest), and enables
+# the theme a default value of extensions.activeThemeID names when it starts a
+# new profile (DistributionCustomizer._checkCustomizationComplete)
+firefox-themes-start-disabled = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/toolkit/mozapps/extensions/internal/XPIInstall.sys.mjs"
+firefox-new-profile-theme = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/browser/components/distribution.sys.mjs"

@@ -101,8 +101,9 @@ files that name our own installed files (`.xml`, `.override`, `.conf`,
 `.plymouth`) follow `PREFIX`. Every entry inside a mapped folder is ours, so `make uninstall`
 removes exactly those. `--defaults` (`make install-defaults`) installs the
 `DEFAULTS` table instead: declarative vendor files under `/usr`, an SDDM
-`conf.d` drop-in in `/usr/lib/sddm/sddm.conf.d/` and a GSettings override,
-that make the theme the default the way a separate defaults package would,
+`conf.d` drop-in in `/usr/lib/sddm/sddm.conf.d/`, a GSettings override and a
+Firefox default-prefs file, that make the theme the default the way a separate
+defaults package would,
 while an administrator's choice in `/etc` still wins. Nothing that is
 installed changes settings. `check.py` stages an install and uninstall into a
 temporary folder on every check, and one under another prefix.

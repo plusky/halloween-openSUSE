@@ -1,7 +1,8 @@
 # SPDX-FileCopyrightText: 2026 Martin Pluskal <martin@pluskal.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 """The Firefox theme: a static WebExtension theme in the palette's colours,
-with a header band cut from the night wallpaper; unpacked and as an .xpi."""
+with a header band cut from the night wallpaper; unpacked and as an .xpi.
+And the optional default that makes it the theme of new Firefox profiles."""
 
 import base64
 import io
@@ -9,7 +10,7 @@ import zipfile
 
 from PIL import Image, ImageFilter
 
-from common import FIREFOX, FIREFOX_ID, SHARED, VERSION, contrast, fill_tokens, rgb, write
+from common import DEFAULTS, FIREFOX, FIREFOX_ID, SHARED, VERSION, contrast, fill_tokens, rgb, write
 from imaging import CROPS
 
 DESKTOP = "shared"
@@ -95,6 +96,8 @@ def build(ctx):
     values = {**p, **{f"{k}_rgb": ", ".join(str(c) for c in rgb(v)) for k, v in p.items()},
               "VERSION": VERSION, "FIREFOX_ID": FIREFOX_ID, "HEADER": name}
     write(out / "manifest.json", fill_tokens((SHARED / "firefox/manifest.json.in").read_text(), values))
+    write(DEFAULTS / "firefox" / f"{ID}.js",
+          fill_tokens((SHARED / f"firefox/defaults/{ID}.js.in").read_text(), {"FIREFOX_ID": FIREFOX_ID}))
     # A fixed timestamp keeps the .xpi identical between builds
     with zipfile.ZipFile(FIREFOX / f"{ID}.xpi", "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(out.iterdir()):

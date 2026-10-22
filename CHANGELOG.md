@@ -6,6 +6,13 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
 
 ## [Unreleased]
 
+### Added
+
+- An optional default (`make install-defaults`) that makes the Firefox theme
+  the theme of every Firefox profile created from then on: Firefox installs a
+  theme it finds in its own folders switched off, so until now it had to be
+  picked by hand in each profile. Profiles that exist keep their theme
+
 ## [2026.10.5] - 2026-10-20
 
 ### Added
