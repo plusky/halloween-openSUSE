@@ -39,6 +39,7 @@ FILES = [
 DEFAULTS = [
     ("defaults/sddm.conf.d", "{prefix}/lib/sddm/sddm.conf.d"),
     ("defaults/glib-2.0/schemas", "{datadir}/glib-2.0/schemas"),
+    ("defaults/firefox", "{libdir}/firefox/browser/defaults/preferences"),
 ]
 # Files that name our own installed files by their /usr/share path
 REWRITE = (".xml", ".override", ".conf", ".plymouth")

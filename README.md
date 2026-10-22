@@ -132,7 +132,7 @@ system folders and changes no settings.
 git lfs install && git lfs pull
 make check                   # build into build/ and validate it
 sudo make install            # copy the theme to /usr/share and /usr/lib64
-sudo make install-defaults   # optional: make it the default (login screen, GNOME)
+sudo make install-defaults   # optional: make it the default (login screen, GNOME, new Firefox profiles)
 ```
 
 ### Then pick it
@@ -190,7 +190,11 @@ sudo make install-defaults   # optional: make it the default (login screen, GNOM
 
 - **Firefox:** `make install` puts the theme into openSUSE Firefox's own
   add-on folder. Restart Firefox and pick it in `about:addons` → *Themes*.
-  See [Firefox](#firefox) for other Firefox builds.
+  `make install-defaults` adds the vendor default
+  `/usr/lib64/firefox/browser/defaults/preferences/openSUSE-halloween.js`,
+  which makes it the theme of every Firefox profile created from then on;
+  profiles that exist keep theirs. See [Firefox](#firefox) for other Firefox
+  builds.
 
 ### Uninstall
 

@@ -648,8 +648,19 @@ def check_firefox():
     unpacked = {f.name: f.read_bytes() for f in theme.iterdir()}
     if packed != unpacked:
         fail(f"firefox {xpi.name} does not match {theme.name}/")
+
+    # The optional default: Firefox installs a theme from its own folders disabled
+    # and, on a new profile, enables the one a default of extensions.activeThemeID
+    # names (tools/upstream.toml, firefox-*). It must name this add-on, and only
+    # as a default: user_pref or lockPref would override what people pick. A
+    # line Firefox can't parse makes it skip the rest of the file.
+    default = BUILD / "defaults/firefox/openSUSE-halloween.js"
+    lines = [line.strip() for line in default.read_text().splitlines()] if default.exists() else ["(no file)"]
+    calls = [line for line in lines if line and not line.startswith("//")]
+    if calls != [f'pref("extensions.activeThemeID", "{FIREFOX_ID}");']:
+        fail(f"firefox default {default.name} sets {calls}, not only extensions.activeThemeID to {FIREFOX_ID}")
     ok(f"firefox theme {manifest['version']}: contrast {worst:.1f}, tab titles over the header {title:.1f}, "
-       f"{xpi.name} {xpi.stat().st_size / 1e3:.0f} kB")
+       f"{xpi.name} {xpi.stat().st_size / 1e3:.0f} kB, the default theme of new profiles with the defaults")
 
 
 # Common screens: (width, height, minimum share of the chameleon box Plasma
@@ -855,7 +866,8 @@ def check_install():
         need = ["usr/share/icons/openSUSE-halloween/index.theme",
                 "usr/share/wallpapers/openSUSEhalloween/metadata.json",
                 "usr/share/plymouth/themes/openSUSE-halloween/openSUSE-halloween.plymouth",
-                f"usr/lib64/firefox/browser/extensions/{FIREFOX_ID}.xpi"]
+                f"usr/lib64/firefox/browser/extensions/{FIREFOX_ID}.xpi",
+                "usr/lib64/firefox/browser/defaults/preferences/openSUSE-halloween.js"]
         if (THEMES / "openSUSE-halloween").exists():
             need += ["usr/share/themes/openSUSE-halloween/gtk-3.0/gtk.css",
                      "usr/share/icons/openSUSE-halloween-adwaita/16x16/places"]
