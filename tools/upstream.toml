@@ -76,6 +76,11 @@ firefox-new-profile-theme = "https://github.com/mozilla-firefox/firefox/blob/FIR
 # (kcm/kcm.cpp); its login form is Breeze's, over the wallpaper WallpaperFader
 # blurs
 plasma-login-manager = "https://invent.kde.org/plasma/plasma-login-manager/-/tree/v6.8.1/src/frontend"
+# targets/plasma.py and check.py check_look_and_feel(): a global theme without
+# contents/colors names its colour scheme, which Plasma looks up with the first
+# letter capitalised (KLookAndFeelManager::colorSchemeFile), so it never finds
+# openSUSEHalloween.colors; with contents/colors, Plasma applies that file
+plasma-global-theme-colours = "https://invent.kde.org/plasma/plasma-workspace/-/blob/v6.8.1/libklookandfeel/klookandfeelmanager.cpp"
 # Of the config files KConfig reads, a later one wins (KConfigPrivate::parseConfigFiles)
 kconfig-sources = "https://invent.kde.org/frameworks/kconfig/-/blob/v6.30.0/src/core/kconfig.cpp"
 # The image wallpaper takes a path or a URL in Image, and crops to fill by default
