@@ -210,7 +210,15 @@ def check_look_and_feel():
             fail(f"look-and-feel {rel} missing or not {size}")
     if dir_size(LNF / "splash") > 1_000_000:
         fail(f"look-and-feel splash is {dir_size(LNF / 'splash') / 1e3:.0f} kB (> 1000 kB)")
-    ok(f"look-and-feel: previews, splash {dir_size(LNF / 'splash') / 1e3:.0f} kB")
+    # Applying the global theme sets the colours only from its contents/colors:
+    # Plasma's lookup by name capitalises it (tools/upstream.toml,
+    # plasma-global-theme-colours) and misses openSUSEHalloween.colors
+    from targets import plasma
+    colors = LNF / "colors"
+    if not colors.exists() or colors.read_bytes() != (USER / f"color-schemes/{plasma.SCHEME}.colors").read_bytes():
+        fail(f"look-and-feel contents/colors is not {plasma.SCHEME}.colors: "
+             "the global theme would leave the colours alone")
+    ok(f"look-and-feel: previews, its colour scheme, splash {dir_size(LNF / 'splash') / 1e3:.0f} kB")
 
 
 def check_plymouth_colours():

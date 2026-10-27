@@ -18,6 +18,13 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
   follow the global theme applied to it in System Settings → *Login Screen* →
   *Apply Plasma Settings…*; it has no themes of its own
 
+### Fixed
+
+- Picking the global theme in System Settings now brings the colour scheme
+  too. Plasma looked the scheme up by its name with the first letter
+  capitalised and never found it, so the colours stayed as they were; the
+  global theme now carries the scheme itself
+
 ## [2026.10.5] - 2026-10-20
 
 ### Added

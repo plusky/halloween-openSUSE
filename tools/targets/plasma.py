@@ -102,3 +102,8 @@ def build(ctx):
     plasma_style.build(USER / "plasma/desktoptheme" / STYLE, p)
     ctx.placeholders.extend(f"ornament {n}" for n in plasma_style.ORNAMENTS if vectors.ornament(n, p) is None)
     build_look_and_feel(ctx)
+    # The global theme carries its colour scheme: without contents/colors,
+    # Plasma looks the scheme up by its name with the first letter
+    # capitalised, never finds openSUSEHalloween.colors and leaves the colours
+    # as they were (tools/upstream.toml, plasma-global-theme-colours)
+    write(USER / "plasma/look-and-feel" / LNF_ID / "contents/colors", colors)
