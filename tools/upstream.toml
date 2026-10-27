@@ -67,3 +67,19 @@ gnome-settings-panels = "https://gitlab.gnome.org/GNOME/gnome-control-center/-/t
 # new profile (DistributionCustomizer._checkCustomizationComplete)
 firefox-themes-start-disabled = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/toolkit/mozapps/extensions/internal/XPIInstall.sys.mjs"
 firefox-new-profile-theme = "https://github.com/mozilla-firefox/firefox/blob/FIREFOX_158_0_RELEASE/browser/components/distribution.sys.mjs"
+# targets/plasmalogin.py and check.py check_plasmalogin(): the greeter has no
+# themes (its QML is built in) and reads its wallpaper from
+# [Greeter][Wallpaper][<plugin>], from /etc/plasmalogin.conf.d, then
+# /usr/lib/plasmalogin/defaults.conf and plasmalogin.conf.d, then
+# /etc/plasmalogin.conf (settings/plasmaloginsettings.cpp); System Settings
+# saves to /etc/plasmalogin.conf and copies the file of a file:// Image
+# (kcm/kcm.cpp); its login form is Breeze's, over the wallpaper WallpaperFader
+# blurs
+plasma-login-manager = "https://invent.kde.org/plasma/plasma-login-manager/-/tree/v6.8.1/src/frontend"
+# Of the config files KConfig reads, a later one wins (KConfigPrivate::parseConfigFiles)
+kconfig-sources = "https://invent.kde.org/frameworks/kconfig/-/blob/v6.30.0/src/core/kconfig.cpp"
+# The image wallpaper takes a path or a URL in Image, and crops to fill by default
+plasma-image-wallpaper = "https://invent.kde.org/plasma/plasma-workspace/-/blob/v6.8.1/wallpapers/image/plugin/utils/mediaproxy.cpp"
+# openSUSE gives Plasma Login Manager's greeter user its global theme
+# (org.openSUSE.desktop) in /etc/xdg/kdeglobals, a file of plasma6-branding-openSUSE
+opensuse-kdeglobals = "https://github.com/openSUSE/plasma-openSUSE/blob/9c664b7d3e53a76147c5c74072f5ed446dfae42a/config-files/etc/xdg/kdeglobals"

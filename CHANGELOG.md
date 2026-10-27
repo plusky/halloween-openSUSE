@@ -12,6 +12,11 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
   the theme of every Firefox profile created from then on: Firefox installs a
   theme it finds in its own folders switched off, so until now it had to be
   picked by hand in each profile. Profiles that exist keep their theme
+- Plasma Login Manager, KDE's new login manager: an
+  optional default (`make install-defaults`) gives its login screen the
+  Halloween background that the SDDM theme shows. Its colours and Plasma style
+  follow the global theme applied to it in System Settings → *Login Screen* →
+  *Apply Plasma Settings…*; it has no themes of its own
 
 ## [2026.10.5] - 2026-10-20
 

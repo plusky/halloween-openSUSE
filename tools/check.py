@@ -5,8 +5,8 @@
 
 Checks, for the desktops that were built: metadata syntax, leftover tokens,
 Plasma metadata against KDE's KPlugin schema, colour contrast, image sizes and
-file budgets, the Plasma style's SVG element IDs, the SDDM theme's links, the
-icon theme and its SVGs, the Firefox theme, a staged install and uninstall, and
+file budgets, the Plasma style's SVG element IDs, the SDDM theme's links and
+Plasma Login Manager's default, the icon theme and its SVGs, the Firefox theme, a staged install and uninstall, and
 REUSE compliance. `--release` also fails while placeholders are still in use.
 """
 
@@ -186,6 +186,7 @@ def check_images():
         fail("wallpaper has no 5K size")
     big = {"zoomed wallpaper": USER / "backgrounds/openSUSEhalloween/night.jpg",
            "login background": SYSTEM / "sddm/breeze-openSUSE-halloween/background.jpg",
+           "Plasma Login Manager background": USER / "openSUSE-halloween/plasmalogin/background.jpg",
            "splash backdrop": LNF / "splash/images/background.jpg"}
     for name, f in big.items():
         if f.exists() and Image.open(f).width < 3840:
@@ -273,7 +274,10 @@ def check_plymouth_layout():
 def login_label_contrast(path):
     """Worst contrast of the login screen's action labels (cream at the 0.85
     opacity KDE's ActionButton uses) over the band of the background they sit
-    on, blurred as SDDM blurs it while the login form shows."""
+    on, blurred as SDDM and Plasma Login Manager blur it while the login form
+    shows. Both draw Breeze's login form; with openSUSE's default colours
+    (BreezeClassic) Plasma Login Manager's labels are whiter, so cream is the
+    worse case."""
     cream = rgb(load_palette()["cream"])
     img = Image.open(path).convert("RGB").resize((1920, 1200), Image.LANCZOS).filter(ImageFilter.GaussianBlur(25))
     band = img.crop((660, 900, 1260, 1000)).resize((60, 10))
@@ -302,6 +306,26 @@ def check_sddm():
     if labels < 4.5:
         fail(f"sddm: the power action labels are {labels:.2f}:1 over the background (< 4.5:1)")
     ok(f"sddm: {len(sddm.BASE_FILES)} links to {sddm.BASE}, own background, action labels {labels:.1f}:1")
+
+
+def check_plasmalogin():
+    """Plasma Login Manager's vendor default makes our login background the
+    greeter's image wallpaper: [Greeter][Wallpaper][org.kde.image][General]
+    Image (tools/upstream.toml, plasma-login-manager), as a path: System
+    Settings copies the file of a file:// URL into its own folder on every
+    save, after which an update or uninstall no longer reaches the greeter."""
+    from targets import plasmalogin
+    background = USER / "openSUSE-halloween/plasmalogin/background.jpg"
+    cp = configparser.ConfigParser(interpolation=None)
+    cp.optionxform = str
+    cp.read_string((BUILD / "defaults/plasmalogin.conf.d" / plasmalogin.DROP_IN).read_text())
+    image = cp.get("Greeter][Wallpaper][org.kde.image][General", "Image", fallback="")
+    if image != f"{plasmalogin.INSTALL_DIR}/background.jpg" or not background.exists():
+        fail(f"plasmalogin default Image {image!r} is not {plasmalogin.INSTALL_DIR}/background.jpg")
+    labels = login_label_contrast(background)
+    if labels < 4.5:
+        fail(f"plasmalogin: the power action labels are {labels:.2f}:1 over the background (< 4.5:1)")
+    ok(f"plasmalogin: the greeter's default wallpaper is our background, action labels {labels:.1f}:1")
 
 
 def svg_ids(path):
@@ -664,7 +688,8 @@ def check_firefox():
 
 
 # Common screens: (width, height, minimum share of the chameleon box Plasma
-# shows, minimum share GNOME, Xfce and SDDM show with their one zoomed picture)
+# shows, minimum share GNOME, Xfce and the login screens show with their one
+# zoomed picture)
 SCREENS = {
     "1920x1080": (1920, 1080, 1.0, 1.0), "2560x1440": (2560, 1440, 1.0, 1.0),
     "3840x2160": (3840, 2160, 1.0, 1.0), "1366x768": (1366, 768, 1.0, 1.0),
@@ -680,7 +705,8 @@ SCREENS = {
 def check_resolutions():
     """How much of the chameleon (art/crops.toml [night] keep) each desktop
     shows on common screens: Plasma picks a size from the wallpaper package and
-    zooms it; GNOME, Xfce and SDDM zoom their one 16:10 picture."""
+    zooms it; GNOME, Xfce, SDDM and Plasma Login Manager zoom their one 16:10
+    picture."""
     from imaging import CROPS, keep_window
     from targets.wallpapers import SIZES, ZOOMED
     try:
@@ -726,7 +752,8 @@ def check_resolutions():
         if plasma < need_plasma - 0.005:
             fail(f"resolution {name}: Plasma shows {plasma:.0%} of the chameleon (< {need_plasma:.0%})")
         if one < need_zoomed - 0.005:
-            fail(f"resolution {name}: GNOME, Xfce and SDDM show {one:.0%} of the chameleon (< {need_zoomed:.0%})")
+            fail(f"resolution {name}: GNOME, Xfce and the login screens show {one:.0%} of the chameleon "
+                 f"(< {need_zoomed:.0%})")
     ok(f"resolutions: {len(SCREENS)} screens, chameleon at least {worst['plasma']:.0%} on Plasma, "
        f"{worst['zoomed']:.0%} with one zoomed picture")
 
@@ -877,6 +904,10 @@ def check_install():
         if (SYSTEM / "sddm").exists():
             need += ["usr/share/sddm/themes/breeze-openSUSE-halloween/Main.qml",
                      "usr/lib/sddm/sddm.conf.d/30-breeze-openSUSE-halloween.conf"]
+        if (USER / "openSUSE-halloween/plasmalogin").exists():
+            from targets import plasmalogin
+            need += [f"{plasmalogin.INSTALL_DIR[1:]}/background.jpg",
+                     f"usr/lib/plasmalogin/plasmalogin.conf.d/{plasmalogin.DROP_IN}"]
         missing = [n for n in need if not (Path(tmp) / n).is_symlink() and not (Path(tmp) / n).exists()]
         if missing:
             fail(f"install lacks {missing}")
@@ -1025,6 +1056,7 @@ def main():
         check_plasma_style()
         check_look_and_feel()
         check_sddm()
+        check_plasmalogin()
     if "gnome" in desktops or "xfce" in desktops:
         check_gtk()
     if "gnome" in desktops:

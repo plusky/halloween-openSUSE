@@ -48,6 +48,7 @@ masters, the placeholder list) and runs every target in
 | `firefox` | shared | `build/firefox/` (unpacked theme and `.xpi`) |
 | `plasma` | plasma | colour scheme, Plasma style (via `tools/plasma_style.py`), global theme |
 | `sddm` | plasma | `build/root/sddm/breeze-openSUSE-halloween/` |
+| `plasmalogin` | plasma | `build/user/openSUSE-halloween/plasmalogin/` (the login background), default in `build/defaults/` |
 | `gtk` | gnome, xfce | `build/user/themes/openSUSE-halloween/gtk-3.0/` (adw-gtk3-dark, recoloured) |
 | `gnome` | gnome | Shell stylesheet, `gnome-background-properties/`, defaults in `build/defaults/` |
 | `xfce` | xfce | `build/user/themes/openSUSE-halloween{,-hdpi,-xhdpi}/xfwm4/`, notification theme |
@@ -101,10 +102,13 @@ files that name our own installed files (`.xml`, `.override`, `.conf`,
 `.plymouth`) follow `PREFIX`. Every entry inside a mapped folder is ours, so `make uninstall`
 removes exactly those. `--defaults` (`make install-defaults`) installs the
 `DEFAULTS` table instead: declarative vendor files under `/usr`, an SDDM
-`conf.d` drop-in in `/usr/lib/sddm/sddm.conf.d/`, a GSettings override and a
+`conf.d` drop-in in `/usr/lib/sddm/sddm.conf.d/`, a Plasma Login Manager one
+in `/usr/lib/plasmalogin/plasmalogin.conf.d/`, a GSettings override and a
 Firefox default-prefs file, that make the theme the default the way a separate
 defaults package would,
-while an administrator's choice in `/etc` still wins. Nothing that is
+while an administrator's choice in `/etc` still wins (for Plasma Login Manager,
+the one in `/etc/plasmalogin.conf`, where System Settings saves it: version
+6.8 reads `/etc/plasmalogin.conf.d/` before the vendor folder). Nothing that is
 installed changes settings. `check.py` stages an install and uninstall into a
 temporary folder on every check, and one under another prefix.
 
@@ -128,6 +132,13 @@ architecture: an i586 package puts the theme in `/usr/lib/firefox`, which a
 
 The SDDM theme builds on openSUSE's `breeze-openSUSE`, as the theme is made
 for openSUSE; another distribution would link plain `breeze` instead.
+
+Plasma Login Manager has no login-screen themes: its QML is built in. Its
+default can only name the background, the same one the SDDM theme shows. The
+login screen's colours, Plasma style and icons come from the global theme of
+its own user, which openSUSE sets in `/etc/xdg/kdeglobals` (another
+package's file) and which System Settings replaces with that of the user who
+clicks *Apply Plasma Settings…*.
 
 The development helpers in `tools/dev/` do change settings: they apply the
 theme to a Plasma session, save and restore the previous settings, and switch

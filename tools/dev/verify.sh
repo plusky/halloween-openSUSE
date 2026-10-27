@@ -48,17 +48,52 @@ for d in "plasma/desktoptheme/$STYLE_ID" "icons/$ICONS_ID" "plasma/look-and-feel
     check "system copy, $(basename "$d")" "$v" same
 done
 
-echo "Login screen (SDDM)"
-current=$(cat /usr/lib/sddm/sddm.conf.d/*.conf /etc/sddm.conf.d/*.conf /etc/sddm.conf 2>/dev/null \
-    | awk -F= '/^\[/ { s = $0; next } s == "[Theme]" && $1 == "Current" { c = $2 } END { print c }')
-check "effective theme" "$current" "$SDDM_ID"
-check "dangling theme symlinks" "$(find "/usr/share/sddm/themes/$SDDM_ID" -xtype l 2>/dev/null | wc -l)" 0
-sddm_home=$(getent passwd sddm | cut -d: -f6)
-if sudo -n true 2>/dev/null; then
-    check "greeter colour scheme" "$(sudo -n kreadconfig6 --file "$sddm_home/.config/kdeglobals" --group General --key ColorScheme)" "$SCHEME_ID"
-    check "greeter Plasma style" "$(sudo -n kreadconfig6 --file "$sddm_home/.config/plasmarc" --group Theme --key name)" "$STYLE_ID"
+dm=$(systemctl show -P Id display-manager.service 2>/dev/null)
+if [ "$dm" = sddm.service ]; then
+    echo "Login screen (SDDM)"
+    current=$(cat /usr/lib/sddm/sddm.conf.d/*.conf /etc/sddm.conf.d/*.conf /etc/sddm.conf 2>/dev/null \
+        | awk -F= '/^\[/ { s = $0; next } s == "[Theme]" && $1 == "Current" { c = $2 } END { print c }')
+    check "effective theme" "$current" "$SDDM_ID"
+    check "dangling theme symlinks" "$(find "/usr/share/sddm/themes/$SDDM_ID" -xtype l 2>/dev/null | wc -l)" 0
+    sddm_home=$(getent passwd sddm | cut -d: -f6)
+    if sudo -n true 2>/dev/null; then
+        check "greeter colour scheme" "$(sudo -n kreadconfig6 --file "$sddm_home/.config/kdeglobals" --group General --key ColorScheme)" "$SCHEME_ID"
+        check "greeter Plasma style" "$(sudo -n kreadconfig6 --file "$sddm_home/.config/plasmarc" --group Theme --key name)" "$STYLE_ID"
+    else
+        echo "  skip  greeter settings (needs sudo)"
+    fi
+elif [ "$dm" = plasmalogin.service ]; then
+    echo "Login screen (Plasma Login Manager)"
+    # What the greeter reads, in its order (settings/plasmaloginsettings.cpp):
+    # every file in its drop-in folders, and a later file wins (KConfig)
+    plm_files=()
+    for f in /etc/plasmalogin.conf.d/* /usr/lib/plasmalogin/defaults.conf /usr/lib/plasmalogin/plasmalogin.conf.d/* /etc/plasmalogin.conf; do
+        [ -f "$f" ] && plm_files+=("$f")
+    done
+    plm_get() {  # plm_get GROUP KEY
+        [ ${#plm_files[@]} -gt 0 ] || return 0
+        awk -v g="$1" -v k="$2" '
+            /^[ \t]*\[/ { s = $0; sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); next }
+            s == g && index($0, "=") {
+                key = substr($0, 1, index($0, "=") - 1); gsub(/^[ \t]+|[ \t]+$/, "", key)
+                if (key == k) { v = substr($0, index($0, "=") + 1); gsub(/^[ \t]+|[ \t]+$/, "", v) }
+            }
+            END { print v }' "${plm_files[@]}"
+    }
+    plugin=$(plm_get "[Greeter]" WallpaperPluginId)
+    check "wallpaper plugin" "${plugin:-org.kde.image}" org.kde.image
+    check "effective background" "$(plm_get "[Greeter][Wallpaper][org.kde.image][General]" Image)" "$PLASMALOGIN_IMAGE"
+    plm_home=$(getent passwd plasmalogin | cut -d: -f6)
+    if sudo -n true 2>/dev/null; then
+        check "greeter global theme" "$(sudo -n kreadconfig6 --file "$plm_home/.config/kdeglobals" --group KDE --key LookAndFeelPackage)" "$LNF_ID"
+        scheme=$(sudo -n kreadconfig6 --file "$plm_home/.config/kdeglobals" --group General --key ColorScheme)
+        [ -n "$scheme" ] || scheme=$(sudo -n kreadconfig6 --file "$plm_home/.config/kdedefaults/kdeglobals" --group General --key ColorScheme)
+        check "greeter colour scheme" "$scheme" "$SCHEME_ID"
+    else
+        echo "  skip  greeter settings (needs sudo)"
+    fi
 else
-    echo "  skip  greeter settings (needs sudo)"
+    echo "Login screen: ${dm:-no display manager} (not checked)"
 fi
 
 echo "Boot splash (Plymouth)"
