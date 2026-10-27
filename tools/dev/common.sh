@@ -20,6 +20,7 @@ SDDM_ID=breeze-openSUSE-halloween
 SDDM_BASE=breeze-openSUSE
 PLYMOUTH_ID=openSUSE-halloween
 SDDM_CONF=/etc/sddm.conf.d/zz-halloween-openSUSE.conf
+PLASMALOGIN_IMAGE=/usr/share/openSUSE-halloween/plasmalogin/background.jpg
 
 # openSUSE defaults, used when no saved state exists
 DEFAULT_LNF=org.openSUSE.desktop

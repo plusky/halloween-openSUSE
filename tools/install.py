@@ -38,6 +38,7 @@ FILES = [
 ]
 DEFAULTS = [
     ("defaults/sddm.conf.d", "{prefix}/lib/sddm/sddm.conf.d"),
+    ("defaults/plasmalogin.conf.d", "{prefix}/lib/plasmalogin/plasmalogin.conf.d"),
     ("defaults/glib-2.0/schemas", "{datadir}/glib-2.0/schemas"),
     ("defaults/firefox", "{libdir}/firefox/browser/defaults/preferences"),
 ]

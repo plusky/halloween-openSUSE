@@ -6,18 +6,16 @@ copied, so updates of breeze-openSUSE keep flowing in."""
 
 import os
 
-from PIL import Image, ImageEnhance
+from PIL import Image
 
 from common import DEFAULTS, ROOT, SYSTEM, fill_tokens, write
-from imaging import crop_to, save_jpeg, save_png, scrim, vignette
+from imaging import login_background, save_jpeg, save_png
+from targets.wallpapers import ZOOMED
 
 DESKTOP = "plasma"
 ID = "breeze-openSUSE-halloween"
 BASE = "breeze-openSUSE"
 INSTALL_DIR = f"/usr/share/sddm/themes/{ID}"
-# SDDM zooms its background to fill each screen: 16:10 at 4K, cropped like the
-# zoomed wallpaper pictures, stays sharp on 4K and keeps the chameleon
-BACKGROUND = (3840, 2400)
 # Everything in breeze-openSUSE except its metadata, preview and theme.conf
 BASE_FILES = ["Background.qml", "KeyboardButton.qml", "Login.qml", "Main.qml", "Messages.sh",
               "SessionButton.qml", "default-logo.svg", "faces"]
@@ -33,10 +31,7 @@ def build(ctx):
         os.symlink(f"../{BASE}/{name}", out / name)
     defaults = ROOT / "plasma/sddm/defaults/30-breeze-openSUSE-halloween.conf"
     write(DEFAULTS / "sddm.conf.d" / defaults.name, defaults.read_text())
-    bg = crop_to(ctx.wallpapers, "night", BACKGROUND[0] / BACKGROUND[1], zoomed=True).resize(BACKGROUND, Image.LANCZOS)
-    # the power actions sit low on the screen, in a band that is light in the
-    # picture: a scrim keeps their labels readable
-    bg = scrim(vignette(ImageEnhance.Brightness(bg).enhance(0.9)))
+    bg = login_background(ctx.wallpapers, ZOOMED)
     save_jpeg(bg, out / "background.jpg")
     shots = ROOT / "art/previews/sddm.png"
     preview = Image.open(shots) if shots.exists() else bg

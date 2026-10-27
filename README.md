@@ -48,6 +48,7 @@ friendly chameleon in a witch hat.
 | Window manager theme, also at 1.5× and 2× | `openSUSE-halloween`, `-hdpi`, `-xhdpi` | Xfce (xfwm4) |
 | Notification theme | `openSUSE-halloween` | Xfce (xfce4-notifyd) |
 | Login screen, built on openSUSE's `breeze-openSUSE` | `breeze-openSUSE-halloween` | SDDM |
+| Login background (the login screen itself has no themes) | `openSUSE-halloween` | Plasma Login Manager |
 | Boot splash | `openSUSE-halloween` | Plymouth |
 | Firefox theme: plum toolbars, pumpkin accents, the moonlit forest behind the tabs | `openSUSE-halloween@pluskal.org` | Firefox |
 | Sway colours and gaps, a Waybar stylesheet and a swaync notification theme | `openSUSE-halloween` | Sway, Waybar, swaync |
@@ -107,16 +108,17 @@ openSUSE's SDDM theme, the GTK, GNOME Shell and Xfce themes and their icons
 with GNOME, Xfce or Sway, the Sway, Waybar and swaync themes with Sway, the
 boot splash with Plymouth, the Firefox theme with Firefox. Where recommended packages are switched off (some minimal images
 set `solver.onlyRequires`), use `zypper install --recommends`. Installing
-only puts files in place; the SDDM and GNOME defaults packages make the
-theme the default there, and your own choices still win.
+only puts files in place; the SDDM, Plasma Login Manager and GNOME defaults
+packages make the theme the default there, and your own choices still win.
 
 | Package | What it installs |
 |---|---|
 | `halloween-openSUSE-wallpapers` | wallpapers, GNOME backgrounds |
 | `halloween-openSUSE-icon-theme` | icon theme over Breeze (Plasma) |
 | `halloween-openSUSE-adwaita-icon-theme` | the same icons over Adwaita (GNOME, Xfce, Sway) |
-| `halloween-openSUSE-plasma` | colour scheme, Plasma style, global theme with splash |
+| `halloween-openSUSE-plasma` | colour scheme, Plasma style, global theme with splash, login background for Plasma Login Manager |
 | `halloween-openSUSE-sddm-theme`, `-sddm-defaults` | login theme, and it as SDDM's default |
+| `halloween-openSUSE-plasmalogin-defaults` | the login background as Plasma Login Manager's default |
 | `halloween-openSUSE-plymouth-theme` | boot splash (choosing it stays with you) |
 | `halloween-openSUSE-gtk3-theme` | GTK 3, GNOME Shell, xfwm4 and notification themes |
 | `halloween-openSUSE-gnome-defaults` | GNOME defaults: accent, dark style, wallpaper, Shell theme name |
@@ -141,10 +143,17 @@ sudo make install-defaults   # optional: make it the default (login screen, GNOM
   *openSUSE Halloween*. It brings the Plasma style, colours, icons, splash
   screen and wallpaper; leave *Use desktop layout from theme* unticked to
   keep your panels.
-- **Login screen:** System Settings → *Colors & Themes* → *Login Screen
+- **Login screen (SDDM):** System Settings → *Colors & Themes* → *Login Screen
   (SDDM)* → *openSUSE Halloween*, or `make install-defaults`, which adds
   the vendor default `/usr/lib/sddm/sddm.conf.d/30-breeze-openSUSE-halloween.conf`
   (a login screen picked in System Settings still wins).
+- **Login screen (Plasma Login Manager):** it has no themes of its own.
+  `make install-defaults` gives it the Halloween background, through the
+  vendor default `/usr/lib/plasmalogin/plasmalogin.conf.d/30-openSUSE-halloween.conf`
+  (a background picked in System Settings still wins). For the colours,
+  Plasma style and icons, pick the global theme for yourself first, then
+  System Settings → *Security & Privacy* → *Login Screen* → *Apply Plasma
+  Settings…* → *Apply*.
 - **GNOME:** in Settings → *Appearance*, pick the dark style, the orange
   accent and the *openSUSE Halloween* background. In GNOME Tweaks →
   *Appearance*, pick `openSUSE-halloween` for *Legacy Applications* and *Shell*

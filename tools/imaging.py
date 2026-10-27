@@ -4,7 +4,7 @@
 
 import tomllib
 
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 from common import ROOT
 
@@ -114,3 +114,13 @@ def recolour(img, mapping):
             pairs = list(zip(weights, targets, strict=True))
             px[x, y] = (*(round(sum(w * t[i] for w, t in pairs) / total) for i in range(3)), a)
     return out
+
+
+def login_background(wallpapers, size):
+    """The night picture as SDDM and Plasma Login Manager show it, zoomed to
+    fill each screen like the zoomed wallpaper pictures (`size`). Their power
+    actions sit low on the screen, in a band that is light in the picture: a
+    scrim keeps their labels readable."""
+    w, h = size
+    bg = crop_to(wallpapers, "night", w / h, zoomed=True).resize(size, Image.LANCZOS)
+    return scrim(vignette(ImageEnhance.Brightness(bg).enhance(0.9)))
