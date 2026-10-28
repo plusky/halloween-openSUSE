@@ -6,7 +6,8 @@
 Checks, for the desktops that were built: metadata syntax, leftover tokens,
 Plasma metadata against KDE's KPlugin schema, colour contrast, image sizes and
 file budgets, the Plasma style's SVG element IDs, the SDDM theme's links and
-Plasma Login Manager's default, the icon theme and its SVGs, the Firefox theme, a staged install and uninstall, and
+Plasma Login Manager's default, the icon theme and its SVGs, the Firefox theme,
+a staged install and uninstall, the FSF's address in the licence texts, and
 REUSE compliance. `--release` also fails while placeholders are still in use.
 """
 
@@ -1022,6 +1023,33 @@ def check_art_provenance():
        f"with the copyright REUSE gives it")
 
 
+def check_licence_texts():
+    """No file a package ships names a GNU licence next to a postal address the
+    FSF has left, which rpmlint reports (incorrect-fsf-address). SPDX's GNU
+    texts, the ones `reuse download` fetches, still give one, so LICENSES/
+    holds the FSF's own current copies, which give its web address instead."""
+    # rpmlint's fsf_license_regex and fsf_wrong_address_regex, which it tries
+    # on the first 2048 bytes of each file
+    gnu = re.compile(rb"(GNU((\s+(Library|Lesser|Affero))?(\s+General)?\s+Public|\s+Free\s+Documentation)\s+Licen[cs]e"
+                     rb"|(GP|FD)L)", re.I)
+    moved = re.compile(rb"(675\s+Mass\s+Ave|59\s+Temple\s+Place|02139|51\s+Franklin\s+St)", re.I)
+    files = sorted((ROOT / "LICENSES").glob("*.txt"))
+    for src, _ in [*install.FILES, *install.DEFAULTS]:
+        path = BUILD / src
+        files += [path] if path.is_file() else sorted(f for f in path.rglob("*") if f.is_file() and not f.is_symlink())
+    stale = []
+    for f in files:
+        with f.open("rb") as fh:
+            head = fh.read(2048)
+        if gnu.search(head) and moved.search(head):
+            stale.append(f.relative_to(ROOT).as_posix())
+    for path in stale:
+        fail(f"licence texts: {path} gives a postal address the FSF has left (rpmlint: incorrect-fsf-address); "
+             f"the FSF's current texts at https://www.gnu.org/licenses/ give its web address")
+    if not stale:
+        ok(f"licence texts: none of {len(files)} shipped files gives a former FSF address")
+
+
 def check_reuse():
     reuse = shutil.which("reuse") or str(ROOT / "tools/.venv/bin/reuse")
     if not Path(reuse).exists():
@@ -1076,6 +1104,7 @@ def main():
     check_install()
     check_readme_images()
     check_art_provenance()
+    check_licence_texts()
     check_reuse()
     placeholders = (BUILD / "placeholders.txt").read_text().split("\n") if (BUILD / "placeholders.txt").exists() else []
     placeholders = [p for p in placeholders if p]

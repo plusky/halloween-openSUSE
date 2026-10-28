@@ -88,3 +88,11 @@ plasma-image-wallpaper = "https://invent.kde.org/plasma/plasma-workspace/-/blob/
 # openSUSE gives Plasma Login Manager's greeter user its global theme
 # (org.openSUSE.desktop) in /etc/xdg/kdeglobals, a file of plasma6-branding-openSUSE
 opensuse-kdeglobals = "https://github.com/openSUSE/plasma-openSUSE/blob/9c664b7d3e53a76147c5c74072f5ed446dfae42a/config-files/etc/xdg/kdeglobals"
+# check.py check_licence_texts(): rpmlint reports a file that names a GNU
+# licence next to one of the FSF's former postal addresses
+# (incorrect-fsf-address, which says to take a new copy from the FSF)
+rpmlint-fsf-address = "https://github.com/rpm-software-management/rpmlint/blob/2.10.0/rpmlint/checks/FilesCheck.py"
+# LICENSES/GPL-2.0-or-later.txt, LGPL-2.0-or-later.txt and LGPL-2.1-only.txt
+# are the FSF's gpl-2.0.txt, lgpl-2.0.txt and lgpl-2.1.txt from here, as of
+# 2026-10-28, which give its web address; SPDX's copies still give 51 Franklin Street
+fsf-licence-texts = "https://www.gnu.org/licenses/old-licenses/"
