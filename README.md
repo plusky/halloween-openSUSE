@@ -107,9 +107,10 @@ Supplements): the Plasma theme and icons with Plasma, the login theme with
 openSUSE's SDDM theme, the GTK, GNOME Shell and Xfce themes and their icons
 with GNOME, Xfce or Sway, the Sway, Waybar and swaync themes with Sway, the
 boot splash with Plymouth, the Firefox theme with Firefox. Where recommended packages are switched off (some minimal images
-set `solver.onlyRequires`), use `zypper install --recommends`. Installing
-only puts files in place; the SDDM, Plasma Login Manager and GNOME defaults
-packages make the theme the default there, and your own choices still win.
+set `solver.onlyRequires`), use `zypper install --recommends`. The theme's
+packages only put files in place. Its defaults packages, which come along the
+same way, make it the default of SDDM, Plasma Login Manager, GNOME and new
+Firefox profiles, and your own choices still win.
 
 | Package | What it installs |
 |---|---|
@@ -123,7 +124,7 @@ packages make the theme the default there, and your own choices still win.
 | `halloween-openSUSE-gtk3-theme` | GTK 3, GNOME Shell, xfwm4 and notification themes |
 | `halloween-openSUSE-gnome-defaults` | GNOME defaults: accent, dark style, wallpaper, Shell theme name |
 | `halloween-openSUSE-sway-theme` | Sway colours, borders and gaps, Waybar and swaync stylesheets |
-| `halloween-openSUSE-firefox-theme` | the Firefox theme |
+| `halloween-openSUSE-firefox-theme`, `-firefox-defaults` | the Firefox theme, and it as the theme of new Firefox profiles |
 
 ### From source
 
