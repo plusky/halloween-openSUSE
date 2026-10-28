@@ -6,6 +6,13 @@ calendar-based: `YEAR.MONTH.PATCH`, the month without a leading zero.
 
 ## [Unreleased]
 
+### Fixed
+
+- The GPL 2.0, LGPL 2.0 and LGPL 2.1 texts in `LICENSES/` are now the FSF's
+  current copies, which give its web address. SPDX's copies gave a postal
+  address the FSF has since left, which rpmlint reports as
+  `incorrect-fsf-address`
+
 ## [2026.10.6] - 2026-10-27
 
 ### Added
